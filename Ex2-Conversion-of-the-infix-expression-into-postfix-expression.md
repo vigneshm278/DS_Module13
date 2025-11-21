@@ -1,112 +1,62 @@
-# Ex2 Conversion of the infix expression into postfix expression
-
+# Ex2 Count how many times a number appears in an array recursively.
 ## AIM:
-To write a C program to convert the infix expression into postfix form using stack by following the operator precedence and associative rule.
+To write a Java program to Count how many times a number appears in an array recursively.
 
 ## Algorithm
-1. Start the program.
-2. Define the push() and pop() functions to add and remove elements from the stack.
-3. Define the priority() function to assign priorities to operators.
-4. Traverse the expression in the IntoPost() function, handling operands, parentheses, and operators.
-5. After processing the expression, pop and print any remaining operators from the stack.
-6.End the program.
+1. Read the value of n, input n elements into array arr, and read the number key whose occurrences must be counted.
+2. Call the recursive function countOccurrences(arr, n, 0, key) starting from index 0.
+3. Inside the recursive function, check if the current index equals n;if yes, return 0 because the entire array has been checked.
+4. If arr[index] equals key, return 1 + countOccurrences(arr, n, index + 1, key);otherwise return countOccurrences(arr, n, index + 1, key).
+5. Return the final count to the main program and print how many times key appears in the array.   
 
 ## Program:
 ```
 /*
-Program to convert the infix expression into postfix expression
+Program Count how many times a number appears in an array recursively.
 Developed by: Vignesh M
-RegisterNumber:  212223240176
-*/
-#include<stdio.h> 
-#include<ctype.h> 
- 
-char stack[100]; 
-int top = -1; 
-void push(char x) 
-{ 
-stack[++top]=x; 
- 
-} 
- 
-char pop() 
-{ 
-if(top==-1) 
-return 0; 
-else 
-return stack[top--]; 
-} 
-int priority(char x) 
-{ 
-if(x=='(') 
-  
-  
-{ 
-return 0; 
-} 
-if(x=='&'||x=='|') 
-{ 
-return 1; 
-} 
-if(x=='+'||x=='-') 
-{ 
-return 2; 
-} 
-if(x=='*'||x=='/'||x=='%') 
-{ 
-return 3; 
-} 
-if(x=='^') 
-{ 
-return 4; 
-} 
-return 0; 
-} 
-char IntoPost(char *exp) 
-{ 
-char *e,x; 
-e=exp; 
-while(*e!='\0') 
-{ 
-if(isalnum(*e)) 
-{ 
-printf("%c ",*e); 
-} 
-else if(*e=='(') 
-{ 
-push(*e); 
-} 
-else if(*e==')') 
-{ 
-while((x=pop())!='(') 
-printf("%c ",x); 
-} 
-else 
-{ 
-while(priority(stack[top])>=priority(*e)) 
-printf("%c ",pop()); 
-push(*e); 
-} 
-e++; 
-} 
-while(top != -1) 
-{ 
-printf("%c ",pop()); 
-}return 0; 
-} 
-int main() 
-{ 
-char exp[100]="3%2+4*(A&B)"; 
-IntoPost(exp); 
-return 1; 
+RegisterNumber: 212223240176
+import java.util.Scanner;
+
+public class CountOccurrencesRecursive {
+    
+    public static int countOccurrences(int[] arr, int n, int index, int key) {
+        if (index == n) {
+            return 0; 
+        }
+        if (arr[index] == key) {
+            return 1 + countOccurrences(arr, n, index + 1, key);
+        } else {
+            return countOccurrences(arr, n, index + 1, key);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+    
+        int n = sc.nextInt();
+
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        int key = sc.nextInt();
+
+        int count = countOccurrences(arr, n, 0, key);
+
+        System.out.println("The number " + key + " appears " + count + " time(s) in the array.");
+    }
 }
 
+
+*/
 ```
 
 ## Output:
-![image](https://github.com/user-attachments/assets/46e7f45d-c6ce-4751-a244-b824692e49e3)
 
+<img width="679" height="380" alt="image" src="https://github.com/user-attachments/assets/f8c606ed-86b7-4c72-9b48-ae94ce15babb" />
 
 
 ## Result:
-Thus, the C program to convert the infix expression into postfix form using stack by following the operator precedence and associative rule is implemented successfully.
+Thus, the Java program to Count how many times a number appears in an array recursively is implemented successfully.
